@@ -1,34 +1,57 @@
-from file_handler import view_file, add_to_file, update_file
+#ES 1 file handler
+#make a funtion for viewing files 
+def view_file(path):
+    #open the file and read it 
+    try:
+        file = open(path, "r")
+        #print the document content and close it
+        print("\nDocument content:")
+        print(file.read())
+        file.close()
+    #except print file not found 
+    except:
+        print("File not found.")
 
-
-def main():
-    file_path = input("Enter the relative file path: ")
-
+#make a funtion for adding file 
+def add_to_file(path):
+    #print the enter text and press enter twice to stop
+    print("Enter text (press enter twice to stop):")
+    #make the lines a empty list
+    lines = []
+    #make a while loop 
     while True:
-        print("\n--- Document Word Count Updater ---")
-        print("1. Update document info")
-        print("2. View document")
-        print("3. Add content")
-        print("4. Exit")
-
-        choice = input("Enter choice (1-4): ")
-
-        if choice == "1":
-            update_file(file_path)
-
-        elif choice == "2":
-            view_file(file_path)
-
-        elif choice == "3":
-            add_to_file(file_path)
-
-        elif choice == "4":
-            print("Goodbye!")
+        #make line equlas input 
+        line = input()
+        #if the line is two spaces break 
+        if line == "":
             break
+        #append lines to line 
+        lines.append(line)
+    #open the file and append 
+    try:
+        file = open(path, "a")
+        #make a loop in lines 
+        for line in lines:
+            #write line plus enter
+            file.write(line + "\n")
+        #close the file and print content added 
+        file.close()
+        print("Content added.")
+    #excep print the file not found 
+    except:
+        print("File not found.")
 
-        else:
-            print("Invalid choice.")
-
-
-if __name__ == "__main__":
-    main()
+# make a funtion for update file 
+def update_file(path):
+    #open the file and read it, then close it 
+    try:
+        file = open(path, "r")
+        text = file.read()
+        file.close()
+        #make a string for word counter and make the length text split
+        word_count = len(text.split())
+        #print that the word count is wordcount
+        print("word count:", word_count)
+    #except print file not found
+    except:
+        print("File not found.")
